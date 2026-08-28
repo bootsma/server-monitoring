@@ -1,0 +1,8 @@
+# Runtime data
+prometheus/data/
+grafana/data/
+
+# Temp files
+*.log
+*.tmp
+.DS_Store
