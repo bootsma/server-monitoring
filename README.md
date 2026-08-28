@@ -1,7 +1,7 @@
 # Server  Monitoring
 Author: Gregory J. Bootsma (and copilot)
 
-Monitoring stack for Slurm GPU servers.
+Monitoring stack for GPU servers.
 
 Components:
 - Prometheus
