@@ -31,6 +31,8 @@ services:
 
     volumes:
       - ./grafana/data:/var/lib/grafana
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning:/etc/grafana/provisioning
 
   dcgm-exporter:
     image: nvcr.io/nvidia/k8s/dcgm-exporter:latest
