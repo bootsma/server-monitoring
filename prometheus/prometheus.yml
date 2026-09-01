@@ -18,3 +18,7 @@ scrape_configs:
       - targets:
           - dcgm-exporter:9400
 
+  - job_name: slurm
+    static_configs:
+      - targets:
+          - host.docker.internal:9341

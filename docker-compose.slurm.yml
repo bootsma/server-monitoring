@@ -1,0 +1,15 @@
+services:
+
+  slurm-exporter:
+    build:
+      context: ./slurm
+
+    container_name: slurm-exporter
+
+    restart: unless-stopped
+
+    network_mode: host
+
+    volumes:
+      - /etc/slurm:/etc/slurm:ro
+      - /run/munge:/run/munge
