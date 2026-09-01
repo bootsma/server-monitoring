@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Prometheus exporter for a local Slurm controller.
 
-The exporter calls the Slurm CLI tools already installed on the host. When run
-inside Docker, mount the host root filesystem at /host and pass --host-root
-/host. Commands are then executed with chroot, so the Slurm binaries, shared
+The exporter calls the Slurm CLI tools already installed on the host. 
+Commands are then executed with , so the Slurm binaries, shared
 libraries, configuration, Munge socket, and version all come from the host.
 
 No third-party Python packages are required.
@@ -30,18 +29,11 @@ class SlurmCommandError(RuntimeError):
 
 
 class SlurmRunner:
-    def __init__(self, host_root: str, timeout: float) -> None:
-        self.host_root = os.path.abspath(host_root)
+    def __init__(self, timeout: float) -> None:
         self.timeout = timeout
 
-    def command(self, executable: str, *arguments: str) -> list[str]:
-        executable_path = f"/usr/bin/{executable}"
-        if self.host_root == "/":
-            return [executable_path, *arguments]
-        return ["/usr/sbin/chroot", self.host_root, executable_path, *arguments]
-
     def run(self, executable: str, *arguments: str) -> str:
-        command = self.command(executable, *arguments)
+        command = [executable, *arguments]
         try:
             result = subprocess.run(
                 command,
@@ -141,7 +133,7 @@ def parse_gres_gpu_count(gres: str) -> int:
 
 def collect_queue(runner: SlurmRunner, output: PrometheusText) -> None:
     # %all is not used because its columns vary across Slurm releases.
-    format_string = "%i|%T|%u|%P|%V|%S|%M|%j|%R"
+    format_string = "%i|%T|%U|%P|%V|%S|%M|%j|%R"
     raw = runner.run(
         "squeue", "--noheader", "--states=all", f"--format={format_string}"
     )
@@ -183,7 +175,7 @@ def collect_queue(runner: SlurmRunner, output: PrometheusText) -> None:
             "Current Slurm jobs by user.",
             "gauge",
             count,
-            {"user": user},
+            {"uid": user},
         )
 
     pending_reasons = Counter(job[8] for job in jobs if job[1].upper() == "PENDING")
@@ -372,11 +364,6 @@ def main() -> None:
         "--port", type=int, default=int(os.getenv("SLURM_EXPORTER_PORT", "9341"))
     )
     parser.add_argument(
-        "--host-root",
-        default=os.getenv("SLURM_EXPORTER_HOST_ROOT", "/"),
-        help="Host filesystem root. Use /host in the Docker deployment.",
-    )
-    parser.add_argument(
         "--command-timeout",
         type=float,
         default=float(os.getenv("SLURM_EXPORTER_COMMAND_TIMEOUT", "10")),
@@ -385,18 +372,18 @@ def main() -> None:
         "--log-level", default=os.getenv("SLURM_EXPORTER_LOG_LEVEL", "INFO")
     )
     args = parser.parse_args()
+    print(args)
 
     logging.basicConfig(
         level=getattr(logging, args.log_level.upper(), logging.INFO),
         format="%(asctime)s %(levelname)s %(message)s",
     )
-    runner = SlurmRunner(args.host_root, args.command_timeout)
+    runner = SlurmRunner( args.command_timeout)
     server = ExporterServer((args.listen, args.port), runner)
     LOG.info(
-        "Listening on http://%s:%d using host root %s",
+        "Listening on http://%s:%d ",
         args.listen,
         args.port,
-        args.host_root,
     )
     try:
         server.serve_forever()
