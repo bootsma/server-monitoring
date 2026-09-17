@@ -2,18 +2,18 @@
   "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
-    "name": "Oxed_c6Wz",
+    "name": "Oxed_c6Wz1",
     "namespace": "default",
-    "uid": "31fbc055-7cc8-43d0-8244-3c3fe7dae954",
-    "resourceVersion": "1787948726039010",
+    "uid": "4b5b0cfb-c0fc-4418-ada0-4f21c02dc79d",
+    "resourceVersion": "1789677543594986",
     "generation": 1,
-    "creationTimestamp": "2026-08-28T20:25:26Z",
+    "creationTimestamp": "2026-09-17T20:39:03Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3764576770768896"
+      "grafana.app/deprecatedInternalID": "2008563907584000"
     },
     "annotations": {
-      "grafana.app/createdBy": "user:ffwkomj2sa8zke",
-      "grafana.app/saved-from-ui": "Grafana v13.2.0 (f681b1359f)"
+      "grafana.app/createdBy": "user:cfyjxys9c622oa",
+      "grafana.app/saved-from-ui": "Grafana v13.2.2 (1bea008f7e)"
     }
   },
   "spec": {
@@ -61,7 +61,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_DEV_POWER_USAGE{instance=~\"${instance}\", gpu=~\"${gpu}\"}",
@@ -173,7 +173,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_DEV_GPU_TEMP{instance=~\"${instance}\", gpu=~\"${gpu}\"}",
@@ -286,7 +286,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "avg(DCGM_FI_DEV_GPU_TEMP{instance=~\"${instance}\", gpu=~\"${gpu}\"})",
@@ -371,7 +371,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "sum(DCGM_FI_DEV_POWER_USAGE{instance=~\"${instance}\", gpu=~\"${gpu}\"})",
@@ -457,7 +457,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_DEV_FB_USED{instance=~\"${instance}\", gpu=~\"${gpu}\"}",
@@ -568,7 +568,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_DEV_SM_CLOCK{instance=~\"${instance}\", gpu=~\"${gpu}\"} * 1000000",
@@ -683,7 +683,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_PROF_PIPE_TENSOR_ACTIVE{instance=~\"${instance}\", gpu=~\"${gpu}\"}",
@@ -797,7 +797,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "datasource": {
-                        "name": "bfwkpu1tf1ts0a"
+                        "name": "Prometheus"
                       },
                       "spec": {
                         "expr": "DCGM_FI_DEV_GPU_UTIL{instance=~\"${instance}\", gpu=~\"${gpu}\"}",
@@ -1028,7 +1028,7 @@
       "hideTimepicker": false,
       "fiscalYearStartMonth": 0
     },
-    "title": "NVIDIA DCGM Exporter Dashboard",
+    "title": "NVIDIA DCGM Exporter Dashboard v1.0",
     "variables": [
       {
         "kind": "QueryVariable",
@@ -1046,7 +1046,7 @@
             "group": "prometheus",
             "version": "v0",
             "datasource": {
-              "name": "bfwkpu1tf1ts0a"
+              "name": "Prometheus"
             },
             "spec": {
               "__legacyStringValue": "label_values(DCGM_FI_DEV_GPU_TEMP, instance)"
@@ -1077,7 +1077,7 @@
             "group": "prometheus",
             "version": "v0",
             "datasource": {
-              "name": "bfwkpu1tf1ts0a"
+              "name": "Prometheus"
             },
             "spec": {
               "__legacyStringValue": "label_values(gpu)"
