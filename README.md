@@ -22,9 +22,11 @@ Requirements:
 Requirement Install Scripts:
 
 Docker (will remove your current system):
+
 ./clean_install_docker.sh
 
-NVIDIA Container tToolkit:
+NVIDIA Container Toolkit:
+
 ./install_nvidia_container_toolkit.sh
 
 
