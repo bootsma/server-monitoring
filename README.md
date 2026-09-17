@@ -30,10 +30,10 @@ NVIDIA Container Toolkit:
 ./install_nvidia_container_toolkit.sh
 
 
-Install:
+Install After Clone:
 
-mkdir -p prometheus/data
-mkdir -p grafana/data
+cd server-monitoring
+./init_directories.sh
 
 For GPU and CPU monitoring:
 
