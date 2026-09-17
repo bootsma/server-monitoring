@@ -15,6 +15,19 @@ Dashboards:
 - 12239 NVIDIA DCGM Exporter
 - Slurm Dashboard
 
+Requirements:
+ - Docker
+ - NVIDIA Container Toolkit
+
+Requirement Install Scripts:
+
+Docker (will remove your current system):
+./clean_install_docker.sh
+
+NVIDIA Container tToolkit:
+./install_nvidia_container_toolkit.sh
+
+
 Install:
 
 mkdir -p prometheus/data
